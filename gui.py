@@ -1,7 +1,7 @@
 from tkinter import *
 import serial
-# Be sure to change COM3 to whatever port your Arduino is on
-ser = serial.Serial('COM3', 9600)
+
+ser = serial.Serial('COM6', 9600)
 class Window(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)               
@@ -13,7 +13,7 @@ class Window(Frame):
         self.inputString = StringVar()
         self.inputBox = Entry(self, textvariable = self.inputString)
         self.inputBox.pack(fill=X)
-        self.quitButton = Button(self, text="Submit", command=self.callback)
+        self.quitButton = Button(self, text="Send string to Arduino", command=self.callback)
         self.quitButton.pack(fill=X)
     def callback(self):
         textInput = self.inputBox.get()[:50]
@@ -22,7 +22,7 @@ class Window(Frame):
         ser.write(bytes(textInput, 'utf-8'))
         ser.close
 root = Tk()
-root.geometry("400x300")
+root.geometry("400x50")
 
 app = Window(root)
 root.mainloop()
